@@ -1,5 +1,6 @@
 import React from 'react'
 import Product from '../Product/Product'
+import axios from 'axios'
 
 export default class Dashboard extends React.Component {
 
@@ -8,17 +9,23 @@ export default class Dashboard extends React.Component {
         this.state = {
 
         }
+
+        this.deleteProduct = this.deleteProduct.bind(this)
+    }
+
+    deleteProduct(id){
+        axios.delete(`/api/product/${id}`)
+            .then(this.props.displayInventory)
     }
 
     render(){
 
-        const { name, price, image } = this.props
+        const { name, price, image, id, productSelected, toBeUpdateProduct} = this.props
 
-        console.log(this.props)
 
-        let productsMapped = name.map((ele, i) => <Product key={i} name={name[i]} price={price[i]} image={image[i]} />)
 
-        console.log(productsMapped)
+        let productsMapped = name.map((ele, i) => <Product deleteProduct={this.deleteProduct} key={i} name={name[i]} price={price[i]} image={image[i]} id={id[i]} productSelected={productSelected} toBeUpdateProduct={toBeUpdateProduct} />)
+
 
 
 

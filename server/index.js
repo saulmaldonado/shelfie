@@ -22,6 +22,12 @@ app.use(express.json())
 //endpoints
 app.get('/api/inventory', controller.getInventory)
 
+app.post('/api/product', controller.createProduct )
+
+app.delete('/api/product/:id', controller.deleteProduct)
+
+app.put('/api/product/:id', controller.updateProduct)
+
 
 //listen
 app.listen(5050, () => console.log('Listening on port 5050...'))
